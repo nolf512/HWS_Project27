@@ -37,6 +37,19 @@ class ViewController: UIViewController {
     }
     
     func drawRectangle(){
+        let renderer = UIGraphicsImageRenderer(size: CGSize(width: 512, height: 512))
+        let img = renderer.image { ctx in //ctx: UIGraphicsImageRendererContextへの参照パラメーター
+            let rectangle = CGRect(x: 0, y: 0, width: 512, height: 512)
+            
+            ctx.cgContext.setFillColor(UIColor.red.cgColor) //長方形の内側の色
+            ctx.cgContext.setStrokeColor(UIColor.black.cgColor) //エッジ周りの色
+            ctx.cgContext.setLineWidth(10) //線の幅　内側に5、外側に5
+            
+            ctx.cgContext.addRect(rectangle) //現在のパスに追加
+            ctx.cgContext.drawPath(using: .fillStroke) //パスを描く
+        }
+        
+        imageView.image = img
         
     }
     
